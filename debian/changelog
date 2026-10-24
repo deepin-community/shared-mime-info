@@ -1,3 +1,18 @@
+shared-mime-info (2.4-5deepin1) unstable; urgency=medium
+
+  * fix(build): generate a reproducible shared-mime-info-spec.pdf
+    - The docbook2pdf output depends on the process locale: with C vs
+      C.UTF-8 the link targets shift by ~0.4pt and rule
+      positions/widths change, which made the shipped PDF differ
+      between two builds of 2.4-5 (the only differing file of the
+      package, PDF metadata dates/IDs already honored
+      SOURCE_DATE_EPOCH)
+    - Pin LC_ALL=C LANG=C for docbook2pdf/docbook2html in debian/rules;
+      verified that three different hostile environments then produce
+      a byte-identical PDF
+
+ -- lichenggang <lichenggang@uniontech.com>  Sat, 24 Oct 2026 12:16:32 +0800
+
 shared-mime-info (2.4-5) unstable; urgency=medium
 
   * Team upload
